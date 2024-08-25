@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "description": "Produit A", "quantity": 2, "price": 50 },
+    { "description": "Produit B", "quantity": 1, "price": 150 },
+    { "description": "Service C", "quantity": 3, "price": 100 }
+  ]
+}

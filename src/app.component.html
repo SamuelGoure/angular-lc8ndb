@@ -1,0 +1,62 @@
+<div class="invoice-container">
+<!-- Bouton de téléchargement placé en haut -->
+<div class="button-container">
+  <button (click)="downloadInvoice()">Télécharger</button>
+</div>
+
+<h1>Facture Proforma</h1>
+<div class="invoice-header">
+  <p><strong>Numéro de Facture :</strong> {{ invoice.number || 'N/A' }}</p>
+  <p><strong>Date :</strong> {{ invoice.date || 'N/A' }}</p>
+</div>
+
+<table class="invoice-table">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Quantité</th>
+      <th>Prix Unitaire</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of invoice.items">
+      <td>
+        <input 
+          type="text" 
+          [(ngModel)]="item.description" 
+          (click)="editItem(item)" 
+          [readonly]="editableItem !== item"
+        >
+      </td>
+      <td>
+        <input 
+          type="number" 
+          [(ngModel)]="item.quantity" 
+          (click)="editItem(item)" 
+          [readonly]="editableItem !== item"
+        >
+      </td>
+      <td>
+        <input 
+          type="number" 
+          [(ngModel)]="item.price" 
+          (click)="editItem(item)" 
+          [readonly]="editableItem !== item"
+        >
+      </td>
+      <td>{{ item.quantity * item.price }} €</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3"><strong>Total :</strong></td>
+      <td>{{ calculateTotal() }} €</td>
+    </tr>
+  </tfoot>
+</table>
+
+<div *ngIf="editableItem">
+  <button (click)="saveItem()">Enregistrer</button>
+</div>
+</div>
